@@ -4,7 +4,7 @@ import React, { Component } from "react";
 const Rows = (props, key) => {
   return (
     <div>
-      <h2>{props.rows}</h2>
+      <li>{props.rows}</li>
     </div>
   );
 };

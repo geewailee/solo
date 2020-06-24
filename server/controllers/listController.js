@@ -1,6 +1,6 @@
 const List = require("../models/listModel");
 const listController = {};
-let index = 0;
+let index;
 
 listController.getList = (req, res, next) => {
   // const queryString = "SELECT * FROM items";
@@ -49,22 +49,22 @@ listController.addItem = (req, res, next) => {
     });
 };
 
-listController.deleteItem = (req, res, next) => {
-  let remove = [index];
+listController.removeItem = (req, res, next) => {
   index--;
+  let remove = [index];
   console.log(`remove ${remove}`);
-  const deleteString = " DELETE FROM items WHERE id=1;";
+  const deleteString = " DELETE FROM items WHERE id=$1;";
 
   List.query(deleteString, remove)
     .then(result => {
       console.log("result remove");
-      console.log(result);
+      // console.log(result);
 
-      // res.locals = result.rows[0];
+      res.locals = result.rows[0];
       next();
     })
     .catch(err => {
-      console.log(`add error`);
+      console.log(`remove error ${err}`);
       next({
         err,
       });

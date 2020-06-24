@@ -7,7 +7,8 @@ class App extends Component {
     super(props);
     this.state = { rows: [] };
     this.input = this.input.bind(this);
-    this.click = this.click.bind(this);
+    this.add = this.add.bind(this);
+    this.remove = this.remove.bind(this);
   }
 
   componentDidMount() {
@@ -27,10 +28,10 @@ class App extends Component {
     this.setState({ input: event.target.value });
   }
 
-  click() {
-    console.log(`clicked`);
+  add() {
+    console.log(`added`);
 
-    fetch(`/api/item`, {
+    fetch(`/api/add`, {
       method: "POST",
       body: JSON.stringify({ input: this.state.input }),
       headers: { "Content-Type": "application/json" },
@@ -39,9 +40,25 @@ class App extends Component {
         return res.json();
       })
       .then(data => {
-        console.log(`post data ${data}`);
+        console.log(`add data ${data}`);
       })
-      .catch(err => console.log(`post fetch error ${err}`));
+      .catch(err => console.log(`add fetch error ${err}`));
+  }
+  remove() {
+    console.log(`removed`);
+
+    fetch(`/api/remove`, {
+      method: "POST",
+      body: JSON.stringify({}),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        console.log(`remove data ${data}`);
+      })
+      .catch(err => console.log(`remove fetch error ${err}`));
   }
 
   render() {
@@ -58,7 +75,7 @@ class App extends Component {
     return (
       <div>
         <h2>Items</h2>
-        <ItemCreator click={this.click} input={this.input} />
+        <ItemCreator add={this.add} input={this.input} remove={this.remove} />
         {individual}
       </div>
     );
