@@ -4,13 +4,13 @@
 
     Create a CRUD To Do list
     Setup Build
-    Authentication
     SQL Database
+    Authentication
 
 # MVP
 
+    List
     Login
-    List Works
 
 # Stretch
 
