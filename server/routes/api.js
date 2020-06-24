@@ -5,4 +5,6 @@ const router = express.Router();
 
 router.get("/", listController.getList, (req, res) => res.status(200).json(res.locals));
 
+router.post("/item", listController.addItem, (req, res) => res.status(200).json(res.locals));
+
 module.exports = router;
